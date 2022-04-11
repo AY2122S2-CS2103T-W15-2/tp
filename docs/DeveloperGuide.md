@@ -299,8 +299,12 @@ This attribute can be added to through the use of the `s/` prefix. The `Salary` 
 
 The feature is implemented to provide functionality and visual representation of important clients. 
 Feature is needed for several user stories involving important clients. A new attribute is thus added to the current 
-Person class. Flag command is created to shorten the process of flagging a client, instead of needing to use the edit 
-command. 
+Person class. `Flag` and `Unflag` command is created to shorten the process of flagging a client, 
+instead of needing to use the edit command. 
+
+The following activity diagram summarizes how to flag a client.
+
+![Flag Client Activity Diagram](images/FlagClientActivityDiagram.png)
 
 Additionally, a new prefix, `f/`, can be used in the add and edit command to specify the flag status directly. 
 This prefix is optional and can be left out during the creation of a new client contact. 
@@ -309,11 +313,7 @@ All new clients will adopt a default `unflagged` state when the flag status is n
 
 The following sequence diagram shows how the `flag`/`unflag` command works:
 
-**[COMING SOON]**
-
-The following activity diagram summarizes how to flag a client.
-
-**[COMING SOON]**
+![Flag Client Sequence Diagram](images/FlagClientSequenceDiagram.png)
 
 #### Design considerations:
 
