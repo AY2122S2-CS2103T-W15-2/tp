@@ -22,8 +22,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -94,6 +97,36 @@ public class HustleBookParserTest {
     }
 
     @Test
+<<<<<<< HEAD
+=======
+    public void parseCommand_flag() throws Exception {
+        FlagCommand command = (FlagCommand) parser.parseCommand(
+                FlagCommand.FLAG_COMMAND_WORD + " " + FULL_NAME_FIRST_PERSON, lastCommand);
+        assertEquals(new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("true")), command);
+    }
+
+    @Test
+    public void parseCommand_unflag() throws Exception {
+        FlagCommand command = (FlagCommand) parser.parseCommand(
+                FlagCommand.UNFLAG_COMMAND_WORD + " " + FULL_NAME_FIRST_PERSON, lastCommand);
+        assertEquals(new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("false")), command);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, lastCommand) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 3", lastCommand) instanceof RedoCommand);
+
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, lastCommand) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " 3", lastCommand) instanceof UndoCommand);
+    }
+
+    @Test
+>>>>>>> 885e6f40aa778462fabc227e9f8bc0d772c7a69d
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand("", lastCommand));

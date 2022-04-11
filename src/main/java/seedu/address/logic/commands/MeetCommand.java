@@ -127,7 +127,8 @@ public class MeetCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MeetCommand // instanceof handles nulls
-                && targetName.equals(((MeetCommand) other).targetName)); // state check
+                && targetName.equals(((MeetCommand) other).targetName)) // state check
+                && scheduledMeeting.equals(((MeetCommand) other).scheduledMeeting); // check meeting details
     }
 
 }

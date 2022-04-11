@@ -130,6 +130,7 @@ public class FlagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FlagCommand // instanceof handles nulls
-                && targetName.equals(((FlagCommand) other).targetName)); // state check
+                && targetName.equals(((FlagCommand) other).targetName))
+                && flag.equals(((FlagCommand) other).flag); // state check
     }
 }

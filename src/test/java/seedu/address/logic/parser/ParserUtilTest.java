@@ -13,9 +13,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_FLAG = "wrongflag";
+    private static final String INVALID_COMMAND = "notcommand";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
@@ -33,6 +37,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_FLAG = "true";
+    private static final String VALID_UNFLAG = "false";
+    private static final String VALID_COMMAND = "exit";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +199,57 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseFlag_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFlag((String) null));
+    }
+
+    @Test
+    public void parseFlag_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFlag(INVALID_FLAG));
+    }
+
+    @Test
+    public void parseFlag_validFlag_returnsFlag() throws Exception {
+        Flag expectedFlag = new Flag(VALID_FLAG);
+        assertEquals(expectedFlag, ParserUtil.parseFlag(VALID_FLAG));
+    }
+
+    @Test
+    public void parseFlag_validUnflag_returnsUnflag() throws Exception {
+        Flag expectedFlag = new Flag(VALID_UNFLAG);
+        assertEquals(expectedFlag, ParserUtil.parseFlag(VALID_UNFLAG));
+    }
+
+    @Test
+    public void parseFlag_validFlagWithWhitespace_returnsTrimmedFlag() throws Exception {
+        String flagWithWhitespace = WHITESPACE + VALID_FLAG + WHITESPACE;
+        Flag expectedFlag = new Flag(VALID_FLAG);
+        assertEquals(expectedFlag, ParserUtil.parseFlag(flagWithWhitespace));
+    }
+
+    @Test
+    public void parseCommand_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCommand((String) null));
+    }
+
+    @Test
+    public void parseCommand_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCommand(INVALID_COMMAND));
+    }
+
+    @Test
+    public void parseCommand_validFlag_returnsFlag() throws Exception {
+        Command.CommandEnum expectedCommandEnum = Command.CommandEnum.exit;
+        assertEquals(expectedCommandEnum, ParserUtil.parseCommand(VALID_COMMAND));
+    }
+
+    @Test
+    public void parseCommand_validFlagWithWhitespace_returnsTrimmedFlag() throws Exception {
+        String commandWithWhitespace = WHITESPACE + VALID_COMMAND + WHITESPACE;
+        Command.CommandEnum expectedCommandEnum = Command.CommandEnum.exit;
+        assertEquals(expectedCommandEnum, ParserUtil.parseCommand(commandWithWhitespace));
     }
 }

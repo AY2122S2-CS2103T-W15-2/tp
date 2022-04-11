@@ -32,4 +32,12 @@ public class HelpCommand extends Command {
             return new CommandResult(commandToPrint.getMessageUsage(), false, false);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof HelpCommand // instanceof handles nulls
+                && (commandToPrint == ((HelpCommand) other).commandToPrint
+                || commandToPrint.equals(((HelpCommand) other).commandToPrint))); // state check
+    }
 }

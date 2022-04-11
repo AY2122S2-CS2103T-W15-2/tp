@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
@@ -44,6 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "3000";
     public static final String VALID_INFO_AMY = "Salary - $4300 and interested in investing";
     public static final String VALID_INFO_BOB = "Salary - $3000 and low risk tolerance";
+    public static final String VALID_MEETING_DATE = "2022-05-25";
+    public static final String VALID_MEETING_TIME = "1530";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -60,6 +64,8 @@ public class CommandTestUtil {
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String INFO_DESC_AMY = " " + PREFIX_INFO + VALID_INFO_AMY;
     public static final String INFO_DESC_BOB = " " + PREFIX_INFO + VALID_INFO_BOB;
+    public static final String MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + VALID_MEETING_DATE;
+    public static final String MEETING_TIME_DESC = " " + PREFIX_MEETING_TIME + VALID_MEETING_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -69,6 +75,9 @@ public class CommandTestUtil {
     public static final String INVALID_PREV_DATE_MET = " " + PREFIX_PREV_DATE_MET + "12/12/2022"; //wrong date format
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "sixty thousand"; // Alphabets not allowed
     public static final String INVALID_INFO = " " + PREFIX_INFO + "High risk \\n tolerance"; // '\n' not allowed in info
+    public static final String INVALID_MEETING_DATE = "25/05/2022-25";
+    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "12-12-2022"; // wrong format
+    public static final String INVALID_MEETING_TIME_DESC = " " + PREFIX_MEETING_TIME + "10:00"; // wrong format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

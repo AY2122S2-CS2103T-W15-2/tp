@@ -142,12 +142,20 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Info} of the {@code Person} that we are building.
+     * Sets the {@code ScheduledMeeting} of the {@code Person} that we are building to specified date and time.
      */
     public PersonBuilder withScheduledMeeting(String meetingDate, String meetingTime) {
         MeetingDate date = new MeetingDate(meetingDate);
         MeetingTime time = new MeetingTime(meetingTime);
         this.scheduledMeeting = new ScheduledMeeting(date, time);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ScheduledMeeting} of the {@code Person} that we are building to no meeting.
+     */
+    public PersonBuilder withScheduledMeeting() {
+        this.scheduledMeeting = new ScheduledMeeting();
         return this;
     }
 
