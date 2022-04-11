@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes flag/unflag command;
+if () then ([Name enter is not in list])
+:Informs user client is not in HustleBook;
+else ([else])
+    if () then ([flag command used])
+        :Create new flag with "true";
+    else ([unflag command used])
+        :Create new flag with "false";
+    endif
+    :Create new edited client with new flag;
+    :Replace old client with new edited client;
+endif
+stop
+
+@enduml
