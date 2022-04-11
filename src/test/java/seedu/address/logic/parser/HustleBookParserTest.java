@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -97,8 +98,7 @@ public class HustleBookParserTest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
+
     public void parseCommand_flag() throws Exception {
         FlagCommand command = (FlagCommand) parser.parseCommand(
                 FlagCommand.FLAG_COMMAND_WORD + " " + FULL_NAME_FIRST_PERSON, lastCommand);
@@ -126,7 +126,6 @@ public class HustleBookParserTest {
     }
 
     @Test
->>>>>>> 885e6f40aa778462fabc227e9f8bc0d772c7a69d
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand("", lastCommand));
