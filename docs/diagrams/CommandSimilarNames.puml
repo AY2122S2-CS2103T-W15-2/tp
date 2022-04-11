@@ -1,0 +1,113 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+box Logic LOGIC_COLOR_T1
+participant ":UI" as ui UI_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
+'participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+user --> ui : ("edit John p/1234567")
+activate ui
+
+ui --> LogicManager : execute("edit John p/1234567")
+activate LogicManager
+
+LogicManager -> HustleBookParser : parseCommand("edit John p/1234567")
+activate HustleBookParser
+
+create EditCommand
+HustleBookParser --> EditCommand : EditCommand("John", "p/1234567")
+activate EditCommand
+
+EditCommand --> HustleBookParser : e = EditCommand("John, p/1234567")
+deactivate EditCommand
+
+HustleBookParser --> LogicManager : e
+deactivate HustleBookParser
+
+
+
+LogicManager -> EditCommand : execute(e)
+activate EditCommand
+
+
+EditCommand -> Model : EditPerson("John", "p/1234567")
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result = "More than 1 client exists with that name..."
+deactivate EditCommand
+
+LogicManager --> LogicManager : lastCommand = e
+
+LogicManager --> ui : result
+deactivate LogicManager
+
+ui --> user : result
+deactivate ui
+
+user --> ui : "1"
+activate ui
+
+ui --> LogicManager : execute("1")
+activate LogicManager
+
+LogicManager --> HustleBookParser : parseCommand("1, lastCommand");
+activate HustleBookParser
+
+HustleBookParser --> EditCommand : setIndex("1");
+activate EditCommand
+
+EditCommand --> HustleBookParser : e
+deactivate EditCommand
+
+HustleBookParser --> LogicManager : e
+deactivate HustleBookParser
+
+LogicManager --> EditCommand : execute(e)
+activate EditCommand
+
+EditCommand -> Model : EditPerson("John", "p/1234567")
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result = "Edit Success"
+deactivate EditCommand
+
+LogicManager --> ui : result
+deactivate LogicManager
+
+ui --> user : result
+deactivate ui
+
+
+@enduml

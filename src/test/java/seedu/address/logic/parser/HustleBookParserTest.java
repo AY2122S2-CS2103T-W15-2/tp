@@ -79,26 +79,32 @@ public class HustleBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(", ")), lastCommand);
+                FindCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(", ")), lastCommand);
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, lastCommand) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " add", lastCommand) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " sort", lastCommand) instanceof HelpCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand));
+                -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, lastCommand) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
+                + " flag", lastCommand) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
+                + " unflag", lastCommand) instanceof ListCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand));
+                -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test
-
     public void parseCommand_flag() throws Exception {
         FlagCommand command = (FlagCommand) parser.parseCommand(
                 FlagCommand.FLAG_COMMAND_WORD + " " + FULL_NAME_FIRST_PERSON, lastCommand);
@@ -128,12 +134,12 @@ public class HustleBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", lastCommand));
+                -> parser.parseCommand("", lastCommand));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
-            -> parser.parseCommand("unknownCommand", lastCommand));
+                -> parser.parseCommand("unknownCommand", lastCommand));
     }
 }

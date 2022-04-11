@@ -42,7 +42,7 @@ To get started, click on any of the headers in the table of content to jump to t
   
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For new users, it is highly recommended starting off from the `Quick Start` section to get HustleBook up and running.
-</div>
+</div
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,8 +389,8 @@ Format: `meet NAME d/DATE t/TIME`
 * `DATE` input must be in `YYYY-MM-DD` format.
 * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
 * `TIME` input must be in 24-hr format of `HHmm`.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
-    of the list shown.
+* In the event where more than one name matches `NAME` input, you would need to specify using `INDEX` of the list shown.
+  * This is similar to the scenario 2 in `edit` and `flag` commands.
 
 Example:
 * `meet John Doe d/2022-03-12 t/1430` Schedules a meeting with client named `John Doe` at 12 March 2022, 2:30pm.
@@ -406,10 +406,10 @@ Cancels current meeting for the client with the specified `NAME`.
 Format: `meet NAME c/`
 
 :information_source: **Note:**
-* `c/` will clear the meeting with the `NAME`
+* `c/` will clear the meeting with the client with the specified `NAME`.
   * If `c/WORDS` is input, eg. `meet John Doe c/abcdef`,HustleBook will still clear the meeting with the given `NAME`.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
-  of the list shown.
+* In the event where more than one name matches `NAME` input, you would need to specify using `INDEX` of the list shown.
+  * This is similar to the scenario 2 in `edit` and `flag` commands.
 
 Example:
 * `meet John Doe c/` Cancels the meeting with client name `John Doe`.

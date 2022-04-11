@@ -286,15 +286,7 @@ This attribute can be added to through the use of the `s/` prefix. The `Salary` 
 * **Alternative 2:** Use the existing constructor with String as a parameter, passing in a predefined value as salary.
     * Pros: Through the use of an existing method, a developer needs to keep track of and update only one constructor for that object if any change is required.
     * Cons: If any change is required for the predefined value, a developer needs to search all usages of this method and update those using the predefined value to a new value. This can be time-consuming.
-
-***Diagrams to be added later***
-
-### Edit Command, Using name
-**To be added**
-
-### Delete Command, Using name
-**To be added**
-
+    
 ### Flagging important clients
 
 The feature is implemented to provide functionality and visual representation of important clients. 
@@ -326,6 +318,47 @@ The following sequence diagram shows interactions of the `flag`/`unflag` command
 * **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
     * Pros: Only one command for both scenarios and fewer tests needed.
     * Cons: Usage is not very intuitive to a user.
+
+### Edit, Delete, Flag, and Meet Command, Using name
+This feature is a more intuitive way for users to perform actions on their clients, as they can simply use the names of their clients
+to identify them, instead of using their index in the list. There are 2 scenarios that will occur when this feature is used.
+
+#### Scenario 1 (All names in HustleBook are unique, there no clients with similar names)
+
+The following sequence diagram shows how the logic of running `edit/delete/flag/meet NAME [ARGS]`.
+
+#### Scenario 2 (There are clients with similar names)
+Assume that the user has 3 clients, named `John Doe`, `John Smith` and `John Willams`.
+
+Running `edit/delete/flag/meet John [ARGS]` will first show a list of clients whose name contains `John`. In this case, 
+`John Doe`, `John Smith` and `John Williams` are displayed as a list to the user. The user is then asked to enter the index
+of the specific "John" they wish to perform their actions on. If the user gives a valid index (in this case `1, 2 or 3`), then the command is executed.
+
+
+The following diagram illustrates the logic of the command being run. 
+![CommandSimilarNames](images/CommandSimilarNames.png)
+
+From the diagram, after the first command is executed, the user is informed that there are
+multiple clients with name `John` and is prompted to input an index. After inputting "1", the function `setIndex` of `EditCommand` is called to
+specify the client to edit. The `EditCommand` is then executed normally.
+
+This gives convenience to our users as they would not have to type the full name of the client they want to perform an action on. 
+Also, when asking the user for multiple inputs, we need a way to keep track of what the user requested beforehand, so they would not need to type it again. 
+The addition of `lastCommand` means that the user does not have to type in the command multiple times.
+
+#### Design considerations:
+
+**Aspect: Typing out the full name of a client:**
+
+* **Alternative 1 (current choice):** User can run a command with only a partial name. If there are multiple users with that name, 
+    the user will be asked a second time to specify which client they are referring to.
+    * Pros: More convenient for user, user does not have to type out the full name of their client.
+    * Cons: Logic is more complicated and is more difficult to implement.
+
+* **Alternative 2:** User types out the full name of their client.
+    * Pros: Easier to implement.
+    * Cons: Inconveniences the user, especially for clients with very long names
+
 
 ### Sort Command
 
@@ -441,21 +474,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
-### Edit/Delete Feature
-
-#### Implementation
-Initially, the edit and delete features of AddressBook only worked on one person in the list - the first one.
-We wanted to add a feature that allowed our users to specify the client they wished to perfom an action on, in the case
-of multiple clients with similar names.
-
-Firstly, we added a `lastCommand` variable to store the last command that the user requested. This will be useful to us
-when we are asking the user to perform an action with multiple inputs.
-
-When `edit` is first called, the `EditCommand` first makes a copy of the `FilteredPersonList`. Then a `Predicate` is
-set to filter the list of clients with matching names as the search term given. If that is the case, we will then show 
-the list of clients with similar names, and ask the user to input the index of the client they wish to edit. With that
-additional input, we can specify which client the user wants to edit based on the index given.
 
 
 
