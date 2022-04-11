@@ -90,7 +90,7 @@ public class HustleBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " add", lastCommand) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " sort", lastCommand) instanceof HelpCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand));
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class HustleBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD
                 + " unflag", lastCommand) instanceof ListCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand));
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test
@@ -134,12 +134,12 @@ public class HustleBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("", lastCommand));
+            -> parser.parseCommand("", lastCommand));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
-                -> parser.parseCommand("unknownCommand", lastCommand));
+            -> parser.parseCommand("unknownCommand", lastCommand));
     }
 }
