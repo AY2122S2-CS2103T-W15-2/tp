@@ -311,7 +311,7 @@ This prefix is optional and can be left out during the creation of a new client 
 
 All new clients will adopt a default `unflagged` state when the flag status is not specified. 
 
-The following sequence diagram shows how the `flag`/`unflag` command works:
+The following sequence diagram shows interactions of the `flag`/`unflag` command between each component:
 
 ![Flag Client Sequence Diagram](images/FlagClientSequenceDiagram.png)
 
